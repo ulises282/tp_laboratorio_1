@@ -52,15 +52,18 @@ int ll_len(LinkedList* this)
  */
 static Node* getNode(LinkedList* this, int nodeIndex)
 {
-    int i;
+    int i=0;
     Node* pNode = NULL;
     if(this!=NULL && nodeIndex>=0 && nodeIndex<ll_len(this))
     {
         pNode = this->pFirstNode;
-        while(nodeIndex<i && pNode->pNextNode)
+        if(nodeIndex != 0)
         {
-            pNode = pNode->pNextNode;
-            i++;
+            while(nodeIndex!=i && pNode->pNextNode)
+            {
+                pNode = pNode->pNextNode;
+                i++;
+            }
         }
     }
     return pNode;
@@ -98,25 +101,10 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
     if(this!=NULL && nodeIndex>=0 && nodeIndex<=ll_len(this))
     {
         nuevoNodo = (Node*)malloc(sizeof(Node));
+        nuevoNodo->pElement = pElement;
         if(nuevoNodo != NULL)
         {
-            nuevoNodo->pElement = pElement;
-            nuevoNodo->pElement = pElement;
-            nuevoNodo->pNextNode = NULL;
             if(nodeIndex == 0)
-            {
-                nuevoNodo->pNextNode = this->pFirstNode;
-                this->pFirstNode = nuevoNodo;
-            }
-            else
-            {
-                prev = getNode(this,nodeIndex-1);
-                next = getNode(this,nodeIndex);
-                nuevoNodo->pNextNode = next;
-                prev->pNextNode = nuevoNodo;
-            }
-
-            /*if(nodeIndex == 0)
             {
                 nuevoNodo->pNextNode = this->pFirstNode;
                 this->pFirstNode = nuevoNodo;
@@ -136,7 +124,7 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
                     prev = getNode(this, nodeIndex-1);
                     prev->pNextNode = nuevoNodo;
                 }
-            }*/
+            }
             this->size++;
             returnAux = 0;
         }
@@ -236,7 +224,26 @@ int ll_set(LinkedList* this, int index,void* pElement)
 int ll_remove(LinkedList* this,int index)
 {
     int returnAux = -1;
-
+    Node* prev = NULL;
+    Node* next = NULL;
+    Node* nodo = NULL;
+    if(this!=NULL && index>=0 && index<ll_len(this))
+    {
+        nodo = getNode(this,index);
+        next = getNode(this,index+1);
+        if(index == 0)
+        {
+            prev = this->pFirstNode;
+        }
+        else
+        {
+            prev = getNode(this,index-1);
+        }
+        prev->pNextNode = next;
+        free(nodo);
+        this->size--;
+        returnAux = 0;
+    }
     return returnAux;
 }
 
