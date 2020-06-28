@@ -259,6 +259,15 @@ int ll_clear(LinkedList* this)
 {
     int returnAux = -1;
 
+    if(this != NULL)
+    {
+        while (this->size != 0)
+        {
+            ll_remove(this, ll_len(this)-1);
+        }
+        returnAux = 0;
+    }
+
     return returnAux;
 }
 
@@ -274,6 +283,14 @@ int ll_deleteLinkedList(LinkedList* this)
 {
     int returnAux = -1;
 
+    if(this != NULL)
+    {
+        if(ll_len(this) != 0)
+        {
+            ll_clear(this);
+        }
+        returnAux = 0;
+    }
     return returnAux;
 }
 
@@ -288,7 +305,21 @@ int ll_deleteLinkedList(LinkedList* this)
 int ll_indexOf(LinkedList* this, void* pElement)
 {
     int returnAux = -1;
-
+    int i = 0;
+    Node* nodo = NULL;
+    if(this != NULL)
+    {
+        nodo = this->pFirstNode;
+        while(ll_len(this) < i && nodo->pElement != pElement)
+        {
+            nodo = nodo->pNextNode;
+            i++;
+        }
+        if(nodo->pElement == pElement)
+        {
+            returnAux = i;
+        }
+    }
     return returnAux;
 }
 
@@ -303,7 +334,17 @@ int ll_indexOf(LinkedList* this, void* pElement)
 int ll_isEmpty(LinkedList* this)
 {
     int returnAux = -1;
-
+    if(this != NULL)
+    {
+        if(ll_len(this) == 0)
+        {
+            returnAux = 1;
+        }
+        else
+        {
+            returnAux = 0;
+        }
+    }
     return returnAux;
 }
 
@@ -319,7 +360,15 @@ int ll_isEmpty(LinkedList* this)
 int ll_push(LinkedList* this, int index, void* pElement)
 {
     int returnAux = -1;
-
+    int validar;
+    if(this!=NULL && index>=0 && index<=ll_len(this))
+    {
+        validar = addNode(this,index,pElement);
+        if(validar == 0)
+        {
+            returnAux = 0;
+        }
+    }
     return returnAux;
 }
 
@@ -335,7 +384,16 @@ int ll_push(LinkedList* this, int index, void* pElement)
 void* ll_pop(LinkedList* this,int index)
 {
     void* returnAux = NULL;
-
+    Node* nodo = NULL;
+    if(this != NULL && index >= 0 && index < ll_len(this))
+    {
+        nodo = getNode(this,index);
+        if(nodo != NULL)
+        {
+            returnAux = nodo->pElement;
+            ll_remove(this,index);
+        }
+    }
     return returnAux;
 }
 
@@ -351,7 +409,19 @@ void* ll_pop(LinkedList* this,int index)
 int ll_contains(LinkedList* this, void* pElement)
 {
     int returnAux = -1;
-
+    int validar;
+    if(this != NULL)
+    {
+        validar = ll_indexOf(this,123);
+        if(validar != -1)
+        {
+            returnAux = 1;
+        }
+        else
+        {
+            returnAux = 0;
+        }
+    }
     return returnAux;
 }
 
