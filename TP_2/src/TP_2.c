@@ -22,8 +22,7 @@ int main()
     contador = 0;
     int ultimoId;
     ultimoId = 0;
-    setbuf(stdout, NULL);
-
+    setbuf(stdout,NULL);
     if(initEmployees(listaEmpleados,LEN) == 0)
     {
         do{
@@ -66,6 +65,7 @@ int main()
                             if(IngresarNumero(&auxId,"Ingrese el id del empleado a eliminar: ","ERROR!!!",0,ultimoId,5)==0)
                             {
                                 removeEmployee(listaEmpleados,LEN,auxId);
+                                contador--;
                             }
                             else
                             {
@@ -94,6 +94,7 @@ int main()
                                         if(IngresarNumero(&orden,"Ingresar orden: ","ERROR!!!",1,2,5) == 0)
                                         {
                                             sortEmployees(listaEmpleados,LEN,orden);
+                                            printEmployees(listaEmpleados,LEN);
                                         }
                                         else
                                         {
@@ -102,9 +103,12 @@ int main()
                                     break;
 
                                     case 2:
+                                        if(promedioSalarios(listaEmpleados,LEN,contador) != 0)
+                                        {
+                                            printf("Error al calcular salaios\n");
+                                        }
                                     break;
                                 }
-                                printEmployees(listaEmpleados,LEN);
                             }
                             else
                             {

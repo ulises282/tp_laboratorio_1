@@ -228,22 +228,74 @@ int sortEmployees(Employee* list, int len, int order)
     Employee auxEmployee;
     if(order == 1)
     {
-        for(int i = 0; i < len-1; i++){
-            for(int j = i+1; j < len; j++){
-                    if(list[i].isEmpty == OCUPADO && list[j].isEmpty == OCUPADO && strcmp(list[i].lastName,list[j].lastName)>0){
-                    auxEmployee = list[i];
-                    list[i] = list[j];
-                    list[j] = auxEmployee;
-                    retorno = 0;
+        for(int i = 0; i < len-1; i++)
+        {
+            for(int j = i+1; j < len; j++)
+            {
+                if(list[i].isEmpty == OCUPADO && list[j].isEmpty == OCUPADO)
+                {
+                    if(strcmp(list[i].lastName,list[j].lastName)>0)
+                    {
+                        auxEmployee = list[i];
+                        list[i] = list[j];
+                        list[j] = auxEmployee;
+                        retorno = 0;
+                    }
+                    else
+                    {
+                        if(strcmp(list[i].lastName,list[j].lastName)==0)
+                        {
+                            sortEmployeesSector(list,len);
+                        }
+                    }
+
                 }
             }
         }
     }
     else
     {
-        for(int i = 0; i < len-1; i++){
-            for(int j = i+1; j < len; j++){
-                    if(list[i].isEmpty == OCUPADO && list[j].isEmpty == OCUPADO && strcmp(list[i].lastName,list[j].lastName)<0){
+        for(int i = 0; i < len-1; i++)
+        {
+            for(int j = i+1; j < len; j++)
+            {
+                if(list[i].isEmpty == OCUPADO && list[j].isEmpty == OCUPADO)
+                {
+                    if(strcmp(list[i].lastName,list[j].lastName)<0)
+                    {
+                        auxEmployee = list[i];
+                        list[i] = list[j];
+                        list[j] = auxEmployee;
+                        retorno = 0;
+                    }
+                    else
+                    {
+                        if(strcmp(list[i].lastName,list[j].lastName)==0)
+                        {
+                            sortEmployeesSector(list,len);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return retorno;
+}
+/******************************************************************************/
+int sortEmployeesSector(Employee* list, int len)
+{
+    int retorno;
+    retorno = -1;
+    Employee auxEmployee;
+    for(int i = 0; i < len-1; i++)
+    {
+        for(int j = i+1; j < len; j++)
+        {
+            if(list[i].isEmpty == OCUPADO && list[j].isEmpty == OCUPADO)
+            {
+                if(list[i].sector<list[j].sector)
+                {
                     auxEmployee = list[i];
                     list[i] = list[j];
                     list[j] = auxEmployee;
@@ -252,7 +304,6 @@ int sortEmployees(Employee* list, int len, int order)
             }
         }
     }
-
     return retorno;
 }
 /******************************************************************************/
@@ -270,4 +321,41 @@ int printEmployees(Employee* list, int len)
     return 0;
 }
 /******************************************************************************/
+//Total y promedio de los salarios, y cuántos empleados superan el salario promedio
+int promedioSalarios(Employee* list, int len,int contador)
+{
+    int retorno;
+    retorno = -1;
+    int i;
+    float promedioSalarios;
+    promedioSalarios = 0;
+    int sumaSalarios;
+    sumaSalarios = 0;
+    int SalariosMayorAlPromedio;
+    SalariosMayorAlPromedio = 0;
+    if(list!=NULL)
+    {
+        for(i=0;i<len;i++)
+        {
+            if(list[i].isEmpty==OCUPADO)
+            {
+                sumaSalarios = sumaSalarios+list[i].salary;
+            }
+        }
+        promedioSalarios = (float)sumaSalarios/contador;
+
+        for(i=0;i<len;i++)
+        {
+            if(list[i].isEmpty==OCUPADO && list[i].salary>promedioSalarios)
+            {
+                SalariosMayorAlPromedio++;
+            }
+        }
+        retorno = 0;
+        printf("\n\nTotal de salarios: %d\n",contador);
+        printf("Promedio de salarios:%.2f \n",promedioSalarios);
+        printf("La cantidad de empleados que superan el salario promedio es de: %d\n\n",SalariosMayorAlPromedio);
+    }
+    return retorno;
+}
 

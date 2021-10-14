@@ -31,8 +31,9 @@ int findEmployeeById(Employee* list, int len,int id);
 int removeEmployee(Employee* list, int len, int id);
 int modificarEmployee(Employee* list, int len, int id);
 int sortEmployees(Employee* list, int len, int order);
-
+int sortEmployeesSector(Employee* list, int len);
 int printEmployees(Employee* list, int len);
+int promedioSalarios(Employee* list, int len,int contador);
 
 
 #endif /* ARRAYEMPLOYEES_H_ */
