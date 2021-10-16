@@ -23,10 +23,14 @@ int main()
     int ultimoId;
     ultimoId = 0;
     setbuf(stdout,NULL);
+
     if(initEmployees(listaEmpleados,LEN) == 0)
     {
         do{
-            printf("1)Alta de empleados\n2)Modificar empleados\n3)Baja de empleados\n4)Informar\n5)salir\n");
+            printf("\t\tMENU\n");
+            printf("======================================\n");
+            printf("\t1)Alta de empleados\n\t2)Modificar empleados\n\t3)Baja de empleados\n\t4)Informar\n\t5)salir\n");
+            printf("======================================\n");
             if(IngresarNumero(&opcion,"Ingresar opcion: ","ERROR! ",1,5,5) == 0)
             {
                 switch(opcion)
@@ -90,7 +94,7 @@ int main()
                                 switch(opcionSecundaria)
                                 {
                                     case 1:
-                                        printf("Desea ordenar de forma: \n1)ascendente\n2)descendente\n");
+                                        printf("\nDesea ordenar de forma: \n1)ascendente\n2)descendente\n");
                                         if(IngresarNumero(&orden,"Ingresar orden: ","ERROR!!!",1,2,5) == 0)
                                         {
                                             sortEmployees(listaEmpleados,LEN,orden);

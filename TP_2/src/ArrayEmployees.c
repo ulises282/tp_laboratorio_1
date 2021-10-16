@@ -5,8 +5,6 @@
  *      Author: ulise
  */
 #include "ArrayEmployees.h"
-
-
 /******************************************************************************/
 int initEmployees(Employee* list, int len)
 {
@@ -310,15 +308,21 @@ int sortEmployeesSector(Employee* list, int len)
 int printEmployees(Employee* list, int len)
 {
     int i;
-    printf("%-4s %-20s %-20s %-15s %-6s\n","ID","NOMBRE","APELLIDO", "SALARIO","SECTOR");
-    for(i=0;i<len;i++)
+    int retorno;
+    retorno = -1;
+    if (list!=NULL)
     {
-        if(list[i].isEmpty == OCUPADO)
+        retorno = 0;
+        printf("%-4s %-20s %-20s %-15s %-6s\n","ID","NOMBRE","APELLIDO", "SALARIO","SECTOR");
+        for(i=0;i<len;i++)
         {
-           printf("%-4d %-20s %-20s %-15.2f %-6d\n",list[i].id,list[i].name,list[i].lastName,list[i].salary,list[i].sector);
+            if(list[i].isEmpty == OCUPADO)
+            {
+               printf("%-4d %-20s %-20s %-15.2f %-6d\n",list[i].id,list[i].name,list[i].lastName,list[i].salary,list[i].sector);
+            }
         }
     }
-    return 0;
+    return retorno;
 }
 /******************************************************************************/
 //Total y promedio de los salarios, y cuántos empleados superan el salario promedio
@@ -358,4 +362,3 @@ int promedioSalarios(Employee* list, int len,int contador)
     }
     return retorno;
 }
-
