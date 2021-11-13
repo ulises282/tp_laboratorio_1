@@ -138,13 +138,27 @@ int main()
 				}
 				else
 				{
-					printf("Cargue los daotos antes de ordenar\n");
+					printf("Cargue los daotos antes de listar\n");
 				}
 
 				break;
 
 			case 7:
-				//controller_sortEmployee(listaEmpleados);
+				if(estadoMenu == 1)
+				{
+					if(controller_sortEmployee(listaEmpleados) == 0)
+					{
+						printf("Empleados ordenados con exito\n");
+					}
+					else
+					{
+						printf("Error al ordenar empleados\n");
+					}
+				}
+				else
+				{
+					printf("Cargue los daotos antes de ordenar\n");
+				}
 				break;
 
 			case 8:

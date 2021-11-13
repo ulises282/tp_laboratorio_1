@@ -25,5 +25,6 @@ int employee_setSueldo(Employee* this,int sueldo);
 int employee_getSueldo(Employee* this,int* sueldo);
 
 int employee_buscarPorId(LinkedList* pArrayListEmployee, int id);
+int employee_CompareByName(void* employee1, void* employee2);
 
 #endif // employee_H_INCLUDED

@@ -149,3 +149,20 @@ int employee_buscarPorId(LinkedList* pArrayListEmployee, int id)
 	}
 	return retorno;
 }
+
+int employee_CompareByName(void* employee1, void* employee2)
+{
+	int retorno;
+	retorno = -1;
+	char auxNombre1[128];
+	char auxNombre2[128];
+
+	if(employee1 != NULL && employee2 != NULL)
+	{
+		employee_getNombre((Employee*)employee1,auxNombre1);
+		employee_getNombre((Employee*)employee2,auxNombre2);
+		retorno = strcmp(auxNombre1,auxNombre2);
+	}
+
+	return retorno;
+}

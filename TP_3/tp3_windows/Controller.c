@@ -216,10 +216,10 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
 {
 	int retorno;
 	retorno = -1;
-
-
-
-
+	if(ll_sort(pArrayListEmployee,employee_CompareByName,1) == 0)
+	{
+		retorno = 0;
+	}
     return retorno;
 }
 
