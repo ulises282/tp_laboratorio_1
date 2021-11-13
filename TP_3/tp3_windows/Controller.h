@@ -1,3 +1,4 @@
+void controller_menu(void);
 int controller_loadIdFromBinary(char* path, int* ultimoId);
 int controller_loadFromText(char* path , LinkedList* pArrayListEmployee);
 int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee);

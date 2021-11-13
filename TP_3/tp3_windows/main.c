@@ -29,6 +29,7 @@ int main()
     estadoMenu = 0;
     option = 10;
 	do{
+		controller_menu();
 		Get_Int(&option,"Ingrese una opcion: ","Error, Reingrese opcion (entre 1 y 10): ",1,10);
 		switch(option)
 		{
