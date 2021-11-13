@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "LinkedList.h"
 #include "Employee.h"
 
@@ -49,22 +50,23 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
 {
 	int retorno;
 	retorno = -1;
-	Employee* aux;
-	Employee* aux2;
+	int valido;
+	Employee aux;
+	Employee* auxEmpleado;
 	if(pFile!=NULL)
 	{
 		while(!feof(pFile))
 		{
-			fread(&aux,sizeof(Employee),1,pFile);
-			if(aux!=NULL)
+			valido = fread(&aux,sizeof(Employee),1,pFile);
+			if(valido==1)
 			{
-				aux2 = employee_new();
-				aux2 = &aux;
-				if(aux2 != NULL)
-				{
-					ll_add(pArrayListEmployee, aux2);
-					retorno = 1;
-				}
+				auxEmpleado = employee_new();
+				employee_setId(auxEmpleado,aux.id);
+				employee_setNombre(auxEmpleado,aux.nombre);
+				employee_setHorasTrabajadas(auxEmpleado,aux.horasTrabajadas);
+				employee_setSueldo(auxEmpleado,aux.sueldo);
+				ll_add(pArrayListEmployee, auxEmpleado);
+				retorno = 1;
 			}
 		}
 	}

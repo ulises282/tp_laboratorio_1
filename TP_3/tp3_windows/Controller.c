@@ -266,15 +266,15 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
 	int retorno;
 	retorno = -1;
 	FILE* archivo;
-	Employee* aux;
+	Employee* auxEmpleado;
 	int i;
 	archivo = fopen(path,"wb");
 	if(archivo!=NULL)
 	{
 		for(i=0;i<ll_len(pArrayListEmployee);i++)
 		{
-			aux =(Employee*) ll_get(pArrayListEmployee, i);
-			fwrite(&aux,sizeof(Employee),1,archivo);
+			auxEmpleado =(Employee*) ll_get(pArrayListEmployee, i);
+			fwrite(auxEmpleado,sizeof(Employee),1,archivo);
 		}
 		fclose(archivo);
 		retorno = 0;

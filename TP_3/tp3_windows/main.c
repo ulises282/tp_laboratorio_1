@@ -43,14 +43,14 @@ int main()
 				break;
 
 			case 2:
-				/*if(controller_loadFromBinary("data.dat",listaEmpleados) == 1 && controller_loadIdFromBinary("id.dat",&ultimoId)==0)
+				if(controller_loadFromBinary("data.dat",listaEmpleados) == 1 && controller_loadIdFromBinary("id.dat",&ultimoId)==0)
 				{
 					printf("Carga de datos exitosa...\n");
 				}
 				else
 				{
 					printf("Error al cargar los datos de empleados...\n");
-				}*/
+				}
 				break;
 
 			case 3:
