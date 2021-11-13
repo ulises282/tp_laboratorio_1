@@ -135,7 +135,7 @@ int controller_editEmployee(LinkedList* pArrayListEmployee,int* ultimoId)
 			IngresarCadena(auxNombre,"Ingresar nombre: ","Error, Reingrese nombre: ",128);
 			Get_Int(&IntHorasTrabajadas,"Ingrese la cantidad de horas trabajadas: ","Error, Reingrese la cantidad de horas trabajdas (entre 1 y 10000): ",1,10000);
 			Get_Int(&IntSueldo,"Ingrese sueldo: ","Error, Reingrese sueldo (entre 1 y 1000000): ",1,1000000);
-			auxEmpleado = ll_get(pArrayListEmployee,index);
+			auxEmpleado = (Employee*)ll_get(pArrayListEmployee,index);
 			employee_setNombre(auxEmpleado,auxNombre);
 			employee_setHorasTrabajadas(auxEmpleado,IntHorasTrabajadas);
 			employee_setSueldo(auxEmpleado,IntSueldo);
@@ -164,6 +164,7 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee,int* ultimoId)
 		index = employee_buscarPorId(pArrayListEmployee,auxId);
 		if(index!=-1)
 		{
+			employee_delete(pArrayListEmployee[index]);
 			ll_remove(pArrayListEmployee,index);
 			retorno = 0;
 		}
@@ -213,7 +214,13 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_sortEmployee(LinkedList* pArrayListEmployee)
 {
-    return 1;
+	int retorno;
+	retorno = -1;
+
+
+
+
+    return retorno;
 }
 
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo texto).

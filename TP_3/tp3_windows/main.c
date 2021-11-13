@@ -25,72 +25,122 @@ int main()
 	LinkedList* listaEmpleados = ll_newLinkedList();
     int option;
     int ultimoId;
-
+    int estadoMenu;
+    estadoMenu = 0;
     option = 10;
 	do{
 		Get_Int(&option,"Ingrese una opcion: ","Error, Reingrese opcion (entre 1 y 10): ",1,10);
 		switch(option)
 		{
 			case 1:
-				if(controller_loadFromText("data.csv",listaEmpleados) == 1 && controller_loadIdFromBinary("idText.dat",&ultimoId)==0)
+				if(estadoMenu==0)
 				{
-					printf("Carga de datos exitosa...\n");
+					if(controller_loadFromText("data.csv",listaEmpleados) == 1 && controller_loadIdFromBinary("idText.dat",&ultimoId)==0)
+					{
+						printf("Carga de datos exitosa...\n");
+						estadoMenu = 1;
+					}
+					else
+					{
+						printf("Error al cargar los datos de empleados...\n");
+					}
 				}
 				else
 				{
-					printf("Error al cargar los datos de empleados...\n");
+					printf("Guarde los datos antes de cargar denuevo\n");
 				}
 				break;
 
 			case 2:
-				if(controller_loadFromBinary("data.dat",listaEmpleados) == 1 && controller_loadIdFromBinary("id.dat",&ultimoId)==0)
+				if(estadoMenu == 0)
 				{
-					printf("Carga de datos exitosa...\n");
+					if(controller_loadFromBinary("data.dat",listaEmpleados) == 1 && controller_loadIdFromBinary("id.dat",&ultimoId)==0)
+					{
+						printf("Carga de datos exitosa...\n");
+						estadoMenu = 1;
+					}
+					else
+					{
+						printf("Error al cargar los datos de empleados...\n");
+					}
 				}
 				else
 				{
-					printf("Error al cargar los datos de empleados...\n");
+					printf("Guarde los datos antes de cargar denuevo\n");
 				}
+
 				break;
 
 			case 3:
-				if(controller_addEmployee(listaEmpleados,&ultimoId) == 0)
+				if(estadoMenu == 1)
 				{
-					printf("Empleado cargado con exito\n");
+					if(controller_addEmployee(listaEmpleados,&ultimoId) == 0)
+					{
+						printf("Empleado cargado con exito\n");
+					}
+					else
+					{
+						printf("Error al cargar empleado\n");
+					}
 				}
 				else
 				{
-					printf("Error al cargar empleado\n");
+					printf("Cargue los datos antes de modificar la lista\n");
 				}
+
 				break;
 
 			case 4:
-				if(controller_editEmployee(listaEmpleados,&ultimoId)==0)
+				if(estadoMenu == 1)
 				{
-					printf("Empleado editado con exito\n");
+					if(controller_editEmployee(listaEmpleados,&ultimoId)==0)
+					{
+						printf("Empleado editado con exito\n");
+					}
+					else
+					{
+						printf("Error al editar empleado");
+					}
 				}
 				else
 				{
-					printf("Error al editar empleado");
+					printf("Cargue los datos antes de modificar la lista\n");
 				}
+
 				break;
 
 			case 5:
-				if(controller_removeEmployee(listaEmpleados,&ultimoId) == 0)
+				if(estadoMenu == 1)
 				{
-					printf("Empleado eliminado con exito\n");
+					if(controller_removeEmployee(listaEmpleados,&ultimoId) == 0)
+					{
+						printf("Empleado eliminado con exito\n");
+					}
+					else
+					{
+						printf("Error al eliminar empleado\n");
+					}
 				}
 				else
 				{
-					printf("Error al eliminar empleado\n");
+					printf("Cargue los datos antes de modificar la lista\n");
 				}
+
 				break;
 
 			case 6:
-				if(controller_ListEmployee(listaEmpleados) != 1)
+				if(estadoMenu == 1)
 				{
-					printf("Error al mostrar los emplados\n");
+					if(controller_ListEmployee(listaEmpleados) != 1)
+					{
+						printf("Error al mostrar los emplados\n");
+					}
 				}
+				else
+				{
+					printf("Cargue los daotos antes de ordenar\n");
+				}
+
 				break;
 
 			case 7:
@@ -98,25 +148,43 @@ int main()
 				break;
 
 			case 8:
-				if(controller_saveAsText("data.csv",listaEmpleados)==0)
+				if(estadoMenu == 1)
 				{
-					printf("Guardado de datos exitoso\n");
+					if(controller_saveAsText("data.csv",listaEmpleados)==0)
+					{
+						printf("Guardado de datos exitoso\n");
+						estadoMenu = 0;
+					}
+					else
+					{
+						printf("Error al guardar datos\n");
+					}
 				}
 				else
 				{
-					printf("Error al guardar datos\n");
+					printf("Primero Cargue los datos antes de guardar\n");
 				}
+
 				break;
 
 			case 9:
-				if(controller_saveAsBinary("data.dat",listaEmpleados)==0)
+				if(estadoMenu == 1)
 				{
-					printf("Guardado de datos exitoso\n");
+					if(controller_saveAsBinary("data.dat",listaEmpleados)==0)
+					{
+						printf("Guardado de datos exitoso\n");
+						estadoMenu = 0;
+					}
+					else
+					{
+						printf("Error al guardar datos\n");
+					}
 				}
 				else
 				{
-					printf("Error al guardar datos\n");
+					printf("Primero Cargue los datos antes de guardar\n");
 				}
+
 				break;
 
 			case 10:

@@ -26,22 +26,12 @@ Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajad
 	return empleado;
 }
 
-Employee* employee_newParametrosN(int* idStr,char* nombreStr,int* horasTrabajadasStr,int* sueldoStr)
+void employee_delete(Employee* this)
 {
-	Employee* empleado;
-	empleado = employee_new();
-	if(empleado!=NULL)
+	if(this!=NULL)
 	{
-		employee_setId(empleado,*idStr);
-		employee_setNombre(empleado,nombreStr);
-		employee_setHorasTrabajadas(empleado,*horasTrabajadasStr);
-		employee_setSueldo(empleado,*sueldoStr);
+		free(this);
 	}
-	return empleado;
-}
-void employee_delete()
-{
-
 }
 
 int employee_setId(Employee* this,int id)
